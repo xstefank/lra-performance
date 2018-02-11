@@ -4,6 +4,8 @@ read -p "Would you like to start with a fresh MiniShift?" CREATE_OC
 if [ "$CREATE_OC" = "y" ]; then
   minishift delete
   minishift start
+  eval $(minishift oc-env)
+  eval $(minishift docker-env)
 else
   read -p "OK to delete old project?" DELETE_PROJECT
   if [ "$DELETE_PROJECT" = "y" ]; then
