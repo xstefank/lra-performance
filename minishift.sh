@@ -3,7 +3,7 @@
 read -p "Would you like to start with a fresh MiniShift?" CREATE_OC
 if [ "$CREATE_OC" = "y" ]; then
   minishift delete
-  minishift start --vm-driver=virtualbox
+  minishift start
 else
   read -p "OK to delete old project?" DELETE_PROJECT
   if [ "$DELETE_PROJECT" = "y" ]; then
@@ -46,7 +46,6 @@ EOF
 oc get projects | grep transactionsmicroservices
 if [ $? = 0 ]; then
   echo "Waiting for transactionsmicroservices to terminate"
-  exit
 fi
 
 set -e

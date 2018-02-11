@@ -4,7 +4,7 @@ urlencode() {
     # urlencode <string>
     old_lc_collate=$LC_COLLATE
     LC_COLLATE=C
-    
+
     local length="${#1}"
     for (( i = 0; i < length; i++ )); do
         local c="${1:i:1}"
@@ -13,7 +13,7 @@ urlencode() {
             *) printf '%%%02X' "'$c" ;;
         esac
     done
-    
+
     LC_COLLATE=$old_lc_collate
 }
 
@@ -26,7 +26,7 @@ fi
 [ $DEBUG ] || DEBUG=0
 [ $SVRONLY ] || SVRONLY=0
 [ $SUSPEND ] || SUSPEND=y
-  
+
 export PORT=8787
 export JDWP=-agentlib:jdwp=transport=dt_socket,server=y,suspend=$SUSPEND,address=
 function getDebugArgs {
@@ -57,7 +57,7 @@ ID5=$!
 
 if [ $SVRONLY -ne 1 ]; then
     echo "Waiting for all the servers to start"
-    sleep 30
+    sleep 60
 
     echo "Running close case"
     BOOKINGID=$(curl -X POST "http://localhost:8084/?hotelName=TheGrand&flightNumber1=BA123&flightNumber2=RH456" -sS | jq -r ".id")
